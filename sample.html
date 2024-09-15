@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Expo Mart Supermarket</title>
+  <style>
+    /* Add some basic styles */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background-color: #f4f4f4;
+      padding: 20px;
+      text-align: center;
+    }
+    nav {
+      background-color: #333;
+      color: #fff;
+      padding: 10px;
+    }
+    nav ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+    }
+    nav ul li {
+      display: inline;
+      margin-right: 10px;
+    }
+    nav ul li a {
+      color: #fff;
+      text-decoration: none;
+    }
+    section {
+      padding: 20px;
+      display: none;
+    }
+    footer {
+      background-color: #333;
+      color: #fff;
+      padding: 20px;
+      text-align: center;
+    }
+    .product {
+      display: inline-block;
+      margin: 10px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      width: 200px;
+    }
+    .product img {
+      max-width: 100%;
+    }
+    .cart {
+      padding: 10px;
+      background-color: #f4f4f4;
+      border: 1px solid #ccc;
+      margin-top: 10px;
+    }
+    .cart ul {
+      list-style-type: none;
+      padding: 0;
+    }
+    .cart li {
+      margin-bottom: 5px;
+    }
+    .total {
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Welcome to Expo Mart</h1>
+  </header>
+  <nav>
+    <ul>
+      <li><a href="#" onclick="showPage('home')">Home</a></li>
+      <li><a href="#" onclick="showPage('about')">About Us</a></li>
+      <li><a href="#" onclick="showPage('products')">Products</a></li>
+      <li><a href="#" onclick="showPage('contact')">Contact Us</a></li>
+      <li><a href="#" onclick="showPage('cart')">Cart</a></li>
+    </ul>
+  </nav>
+  <section id="home">
+    <h2>Home</h2>
+    <p>Welcome to Expo Mart, your one-stop supermarket for all your grocery needs. We offer a wide range of products and exceptional customer service. Check out our special offers and visit us today!</p>
+  </section>
+  <section id="about">
+    <h2>About Us</h2>
+    <p>At Expo Mart, we strive to provide our customers with the best shopping experience. Our supermarket has been serving the community for over 20 years. We are committed to offering high-quality products and competitive prices.</p>
+  </section>
+  <section id="products">
+    <h2>Products</h2>
+    <div class="product">
+      <img src="vegetable1.jpg" alt="Vegetable 1">
+      <h3>Vegetable 1</h3>
+      <p>$2.99</p>
+      <button onclick="addToCart('Vegetable 1', 2.99)">Add to Cart</button>
+    </div>
+    <div class="product">
+      <img src="vegetable2.jpg" alt="Vegetable 2">
+      <h3>Vegetable 2</h3>
+      <p>$1.99</p>
+      <button onclick="addToCart('Vegetable 2', 1.99)">Add to Cart</button>
+    </div>
+    <div class="product">
+      <img src="vegetable3.jpg" alt="Vegetable 3">
+      <h3>Vegetable 3</h3>
+      <p>$3.49</p>
+      <button onclick="addToCart('Vegetable 3', 3.49)">Add to Cart</button>
+    </div>
+  </section>
+  <section id="contact">
+    <h2>Contact Us</h2>
+    <p>If you have any questions or feedback, please feel free to contact us:</p>
+    <p>Email: info@expomart.com</p>
+    <p>Phone: 123-456-7890</p>
+  </section>
+  <section id="cart">
+    <h2>Cart</h2>
+    <div class="cart">
+      <ul id="cartItems">
+      </ul>
+      <p class="total">Total: $<span id="cartTotal">0.00</span></p>
+      <button onclick="checkout()">Checkout</button>
+    </div>
+  </section>
+  <footer>
+    <p>&copy; 2023 Expo Mart Supermarket. All rights reserved.</p>
+  </footer>
+
+  <script>
+    var cartItems = [];
+    var cartTotal = 0;
+
+    function showPage(pageId) {
+      var sections = document.getElementsByTagName("section");
+      for (var i = 0; i < sections.length; i++) {
+        sections[i].style.display = "none";
+      }
+      document.getElementById(pageId).style.display = "block";
+    }
+
+    function addToCart(itemName, itemPrice) {
+      cartItems.push(itemName);
+      cartTotal += itemPrice;
+
+      updateCart();
+    }
+
+    function updateCart() {
+      var cartItemsElement = document.getElementById("cartItems");
+      var cartTotalElement = document.getElementById("cartTotal");
+
+      // Clear previous items
+      cartItemsElement.innerHTML = "";
+
+      // Add new items
+      cartItems.forEach(function(item) {
+        var li = document.createElement("li");
+        li.textContent = item;
+        cartItemsElement.appendChild(li);
+      });
+
+      // Update total
+      cartTotalElement.textContent = cartTotal.toFixed(2);
+    }
+
+    function checkout() {
+      if (cartItems.length === 0) {
+        alert("Your cart is empty. Add items before checking out.");
+      } else {
+        alert("Thank you for your purchase! Your total amount is $" + cartTotal.toFixed(2));
+        cartItems = [];
+        cartTotal = 0;
+        updateCart();
+      }
+    }
+  </script>
+  <script>
+    // Show the home page by default
+    showPage("home");
+  </script>
+</body>
+</html>
