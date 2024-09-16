@@ -36,7 +36,7 @@
   		Already a member? <a href="login.php">Sign in</a>
   	</p>
 	<p>
-	<a href="Index.html">Go back to Home</a>
+	<a href="index.html">Go back to Home</a>
 	</p>
 	</div>
   </form>
